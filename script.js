@@ -877,7 +877,6 @@ function renderCriteria() {
                             data-criterion-id="${escapeHtml(criterion.id)}">
                             ${renderWeightOptions(criterion.weight)}
                         </select>
-                        <span>${WEIGHT_LABELS[criterion.weight]}</span>
                     </div>
                     <p class="inline-error" id="criterion-error-${escapeHtml(criterion.id)}">${escapeHtml(errorText)}</p>
                 </article>

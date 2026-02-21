@@ -121,6 +121,7 @@ h2 {
 .stack-list {
     display: grid;
     gap: 0.8rem;
+    grid-template-columns: minmax(0, 1fr);
 }
 
 .item-card {
@@ -128,6 +129,8 @@ h2 {
     border-radius: 12px;
     padding: 0.8rem;
     background: #fcfdfd;
+    width: 100%;
+    min-width: 0;
 }
 
 .item-card-head {
@@ -150,9 +153,24 @@ h2 {
 
 .criteria-row {
     display: grid;
-    grid-template-columns: minmax(0, 1fr) 180px auto;
+    grid-template-columns: 1fr;
     gap: 0.5rem;
     align-items: center;
+    min-width: 0;
+}
+
+.criteria-row > * {
+    min-width: 0;
+}
+
+.criteria-row input[type="text"] {
+    min-width: 0;
+    width: 100%;
+}
+
+.criteria-row select {
+    min-width: 0;
+    width: 100%;
 }
 
 label {
@@ -424,7 +442,7 @@ input[type="radio"]:focus-visible + span {
     }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 760px) {
     .app-shell {
         width: calc(100% - 1rem);
         margin-inline: 0.5rem;
@@ -439,7 +457,4 @@ input[type="radio"]:focus-visible + span {
         align-items: flex-start;
     }
 
-    .criteria-row {
-        grid-template-columns: 1fr;
-    }
 }

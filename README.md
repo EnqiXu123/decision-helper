@@ -1,2 +1,8 @@
-# decision-helper
-A simple web app that helps users make decisions randomly using JavaScript.
+# Decision Helper
+
+A simple web app that helps you make decisions randomly.
+
+## Files
+- index.html
+- style.css
+- script.js

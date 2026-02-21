@@ -1,14 +1,77 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Decision Helper</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Decision Helper</h1>
-    <button onclick="makeDecision()">Help Me Decide</button>
-    <p id="result"></p>
+    <main class="app-shell">
+        <header class="hero panel">
+            <p class="eyebrow">Weighted Decision Assistant</p>
+            <h1>Decision Helper</h1>
+            <p class="hero-copy">
+                Compare options with weighted criteria, live scoring, and clear reasons for the final ranking.
+            </p>
 
+            <div class="title-row">
+                <label for="decision-title">Decision Title (Optional)</label>
+                <input id="decision-title" name="decision-title" type="text" maxlength="80"
+                    placeholder="Example: Choosing a new laptop">
+            </div>
+
+            <div class="hero-actions">
+                <button id="reset-btn" type="button" class="btn btn-secondary">Reset Decision</button>
+            </div>
+
+            <p id="status-banner" class="status-banner" role="status" aria-live="polite"></p>
+        </header>
+
+        <section class="workspace">
+            <section class="panel">
+                <div class="section-head">
+                    <h2>Options</h2>
+                    <button id="add-option-btn" type="button" class="btn">Add Option</button>
+                </div>
+                <p class="helper-text">Minimum 2, maximum 20. Names must be unique.</p>
+                <div id="options-list" class="stack-list"></div>
+                <p id="options-section-error" class="section-error" aria-live="polite"></p>
+            </section>
+
+            <section class="panel">
+                <div class="section-head">
+                    <h2>Criteria</h2>
+                    <button id="add-criterion-btn" type="button" class="btn">Add Criterion</button>
+                </div>
+                <p class="helper-text">Minimum 1, maximum 20. Weight range is 1-5.</p>
+                <div id="criteria-list" class="stack-list"></div>
+                <p id="criteria-section-error" class="section-error" aria-live="polite"></p>
+            </section>
+
+            <section class="panel panel-wide">
+                <div class="section-head">
+                    <h2>Ratings Grid</h2>
+                    <p class="helper-text">Rate each option against each criterion.</p>
+                </div>
+                <div class="ratings-wrap">
+                    <table id="ratings-table" class="ratings-table"></table>
+                </div>
+            </section>
+
+            <section class="panel panel-wide">
+                <div class="section-head">
+                    <h2>Results</h2>
+                    <p id="score-summary" class="helper-text"></p>
+                </div>
+                <article id="winner-card" class="winner-card"></article>
+                <ol id="ranking-list" class="ranking-list"></ol>
+                <div id="reasons-list" class="reasons-list"></div>
+            </section>
+        </section>
+    </main>
+
+    <div id="live-region" class="sr-only" aria-live="polite" aria-atomic="true"></div>
     <script src="script.js"></script>
 </body>
 </html>

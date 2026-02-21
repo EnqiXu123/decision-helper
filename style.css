@@ -30,7 +30,7 @@ body {
         radial-gradient(circle at 10% -10%, #ffffff 0%, transparent 40%),
         linear-gradient(150deg, var(--bg-start), var(--bg-end));
     font-family: "Avenir Next", "Segoe UI", "Helvetica Neue", sans-serif;
-    overflow-x: hidden;
+    overflow-x: auto;
 }
 
 .app-shell {
@@ -43,7 +43,7 @@ body {
 .workspace {
     display: grid;
     gap: 1rem;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
 }
 
 .panel {
@@ -323,6 +323,12 @@ input[type="radio"]:focus-visible + span {
 }
 
 .star-option input[type="radio"]:checked + span {
+    border-color: var(--accent-strong);
+    background: var(--accent-soft);
+    color: #08614e;
+}
+
+.star-option span.is-active {
     border-color: var(--accent-strong);
     background: var(--accent-soft);
     color: #08614e;

@@ -693,6 +693,7 @@ function setRating(optionId, criterionId, value) {
     }
 
     state.ratings[ratingKey(optionId, criterionId)] = value;
+    setRatingVisualInDom(optionId, criterionId, value);
     renderResults();
     registerMutation("none");
 }
@@ -702,10 +703,21 @@ function clearRating(optionId, criterionId) {
 }
 
 function clearRatingInDom(optionId, criterionId) {
+    setRatingVisualInDom(optionId, criterionId, 0);
+}
+
+function setRatingVisualInDom(optionId, criterionId, selectedValue) {
     const selector = `input[data-role='rating-input'][data-option-id='${cssEscape(optionId)}'][data-criterion-id='${cssEscape(criterionId)}']`;
     const inputs = dom.ratingsTable.querySelectorAll(selector);
     for (const input of inputs) {
-        input.checked = false;
+        const value = Number.parseInt(input.value, 10);
+        const isChecked = selectedValue > 0 && value === selectedValue;
+        const isFilled = selectedValue > 0 && value <= selectedValue;
+        input.checked = isChecked;
+        const star = input.nextElementSibling;
+        if (star) {
+            star.classList.toggle("is-active", isFilled);
+        }
     }
 }
 
@@ -913,6 +925,7 @@ function renderRatings() {
                     const stars = [1, 2, 3, 4, 5]
                         .map((value) => {
                             const checked = selectedValue === value ? " checked" : "";
+                            const filledClass = selectedValue >= value ? " is-active" : "";
                             return `
                                 <label class="star-option">
                                     <input type="radio" data-role="rating-input"
@@ -920,7 +933,7 @@ function renderRatings() {
                                         data-criterion-id="${escapeHtml(criterion.id)}"
                                         name="${escapeHtml(groupName)}" value="${value}"${checked}
                                         aria-label="${escapeHtml(`${value} stars for ${option.name} on ${criterion.name}`)}">
-                                    <span aria-hidden="true">★</span>
+                                    <span class="${filledClass.trim()}" aria-hidden="true">★</span>
                                 </label>
                             `;
                         })
